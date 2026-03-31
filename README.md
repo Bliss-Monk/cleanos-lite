@@ -8,7 +8,7 @@ rules automatically, and repairs any drift caused by Windows Updates.
 
 ---
 
-## Install (one command — no USB required)
+## Install
 
 Open PowerShell **as Administrator** and paste:
 
