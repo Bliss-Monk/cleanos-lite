@@ -53,36 +53,10 @@ v1.1.0 (March 2026):
 v1.0.0 (March 2026):
   - Initial release.
 
-REPOSITORY SETUP (do this once):
-==================================
-1. Create a free account at https://github.com
-2. New repository → name it "cleanos-lite-rules" → Public → Create
-3. Upload these four files from your output folder:
-     CleanOS_Lite.ps1   (this file)
-     ruleset.json
-     version.json
-     README.md
-4. Open CleanOS_Lite.ps1 in the repo → click Raw → copy the URL
-5. Open version.json in the repo → click Raw → copy the URL
-6. Paste both URLs into the constants below (replacing the placeholders)
-7. Commit the updated CleanOS_Lite.ps1 — you're live
-
-INSTALL ON ANY MACHINE (one command, run PowerShell as Administrator):
-  $s = "$env:TEMP\CleanOS_Lite.ps1"
-  Invoke-WebRequest "https://raw.githubusercontent.com/.../CleanOS_Lite.ps1" -OutFile $s
-  powershell -ExecutionPolicy Bypass -File $s
-
-TO PUSH UPDATES:
-  New privacy rules : edit ruleset.json → bump version date → commit
-  New script version: update CleanOS_Lite.ps1 → bump $Version → update version.json
-                      scriptVersion to match → commit both files
-  All installed machines update themselves on the next login. Done.
-
 .NOTES
 Built for: Windows 11 (22H2 - 26H1+)
 Version: 1.3.0
 Author: Eon Smuts
-Last Updated: March 2026
 #>
 
 param(
@@ -93,7 +67,7 @@ param(
 $Version = "1.3.0"
 
 # =============================================================================
-# CONFIGURATION — paste your GitHub raw URLs here after following the setup guide
+# CONFIGURATION
 # =============================================================================
 $ScriptUrl   = "https://raw.githubusercontent.com/Bliss-Monk/CleanOS-Lite/refs/heads/main/CleanOS_Lite.ps1"
 $VersionUrl  = "https://raw.githubusercontent.com/Bliss-Monk/CleanOS-Lite/refs/heads/main/version.json"
@@ -537,7 +511,7 @@ function Start-Cleanup {
         Set-RegistrySafe 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection' "DisableOneSettingsDownloads"      1
         Set-RegistrySafe 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection' "DoNotShowFeedbackNotifications"   1
     }
-    Run-Task "Recall, AI & Cortana" "Disabled Recall, AI Data Analysis, Copilot and Cortana policy keys" {
+    Run-Task "Recall, AI, Copilot & Cortana" "Disabled Recall, AI Data Analysis, Copilot and Cortana policy keys" {
         Set-RegistrySafe 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Recall'         "DisableRecall"         1
         Set-RegistrySafe 'HKCU:\Software\Policies\Microsoft\Windows\WindowsAI'      "DisableAIDataAnalysis" 1
         Set-RegistrySafe 'HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot' "TurnOffWindowsCopilot" 1
@@ -698,7 +672,7 @@ function Start-Cleanup {
         Write-Host @"
 
   ─────────────────────────────────────────────────────────────
-  ✔ Your laptop is now hardened. The Sentry runs on every
+  ✔ Your laptop is now optimised. The Sentry runs on every
     login, fetches the latest privacy rules and script updates
     from GitHub automatically. No further action needed.
 
@@ -808,7 +782,7 @@ $Banner = @"
 ░░███     ███ ░███ ░███░░░   ███░░███  ░███ ░███ ░░███     ███  ███    ░███
  ░░█████████  █████░░██████ ░░████████ ████ █████ ░░░███████░  ░░█████████ 
   ░░░░░░░░░  ░░░░░  ░░░░░░   ░░░░░░░░ ░░░░ ░░░░░    ░░░░░░░     ░░░░░░░░░  
-            Lite v$Version  —  Living Sentry  —  Office Safe
+    Lite v$Version                Your Hardware. Your Data. Your Choice.
 "@
 
 do {
