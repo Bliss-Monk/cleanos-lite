@@ -672,14 +672,21 @@ function Start-Cleanup {
         Write-Host @"
 
   ─────────────────────────────────────────────────────────────
-  ✔ Your laptop is now optimised. The Sentry runs on every
-    login, fetches the latest privacy rules and script updates
-    from GitHub automatically. No further action needed.
+ 
+  ✔  Your laptop is now optimised. The Sentry runs on every
+     login, fetches the latest privacy rules and script updates
+     from GitHub automatically. No further action needed.
+
+  ℹ  Your lock screen may now show a plain background instead
+     of the rotating Microsoft images. To set your own photo:
+     Settings → Personalisation → Lock screen → Picture
+     → Browse photos. A local slideshow also works fine.
 
   ⚠  After a major Windows feature update: the Sentry will
      detect it automatically and run a full repair pass on
      your next login. You can also re-run CleanOS Lite from
      your Desktop shortcut at any time.
+     
   ─────────────────────────────────────────────────────────────
 "@ -ForegroundColor Cyan
         if ((Read-Host "`n  Run disk cleanup now? Frees several GB. (Y/N)") -eq 'y') { Invoke-DiskCleanup }
